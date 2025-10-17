@@ -1,6 +1,7 @@
 # Mathematical Foundations of Poisoning Attacks on Linear Regression over Cumulative Distribution Functions
 
-This repository contains the code for the paper "Mathematical Foundations of Poisoning Attacks on Linear Regression over Cumulative Distribution Functions". The code is based on [SOSD](https://github.com/learnedsystems/SOSD) (Search on Sorted Data Benchmark).
+This repository contains the artifact for the paper **"Mathematical Foundations of Poisoning Attacks on Linear Regression over Cumulative Distribution Functions."** The implementation builds upon [SOSD](https://github.com/learnedsystems/SOSD) (Search on Sorted Data Benchmark).
+This repository is anonymized for double-blind review.
 
 ## Repository Structure (What is modified from SOSD)
 
@@ -13,60 +14,7 @@ This repository contains the code for the paper "Mathematical Foundations of Poi
 - `docker_run.sh`
 - `docker_run_all.sh`
 - `requirements.txt`
-- `poisoning_projects/` - Contains all the poisoning attack implementation
-
-## Quick Start
-
-### Dataset Download (if using SOSD datasets)
-
-```bash
-./scripts/download.sh
-```
-
-### Simple Test
-
-To run a simple test of the poisoning attack algorithms:
-
-```bash
-cd poisoning_projects/poisoning/scripts
-./test.sh
-```
-
-This executes the content of `poisoning_projects/poisoning/cpp/apps/poisoning_quick_test_main.cpp`.
-
-#### Expected Output Example
-
-```
-================================================================================
-xs    : [0, 3, 7, 8]
-lambda: 1
---------------------------------------------------------------------------------
-loss (legitimate)            : 0.054878048780
-loss (poisoned, greedy)      : 0.130841121495 (Time = 0.001ms)
-loss (poisoned, brute force) : 0.130841121495 (Time = 0.002ms)
-upper bound (binary search)  : 0.263888888889 (w* = 0.416667, Time = 0.000ms)
-upper bound (golden section) : 0.263888888889 (w* = 0.416667, Time = 0.000ms)
-upper bound (strict)         : 0.263888888889 (w* = 0.416667, Time = 0.000ms)
---------------------------------------------------------------------------------
-poison values (greedy)      : [6]
-poison values (brute force) : [6]
-================================================================================
-
-================================================================================
-xs    : [0, 3, 7]
-lambda: 1
---------------------------------------------------------------------------------
-loss (legitimate)            : 0.004504504505
-loss (poisoned, greedy)      : 0.100000000000 (Time = 0.000ms)
-loss (poisoned, brute force) : 0.100000000000 (Time = 0.000ms)
-upper bound (binary search)  : 0.159090909091 (w* = 0.363636, Time = 0.000ms)
-upper bound (golden section) : 0.159090909091 (w* = 0.363636, Time = 0.000ms)
-upper bound (strict)         : 0.159090909091 (w* = 0.363636, Time = 0.000ms)
---------------------------------------------------------------------------------
-poison values (greedy)      : [1]
-poison values (brute force) : [1]
-================================================================================
-```
+- `poisoning_projects/`  -  Contains all the poisoning attack implementation
 
 ## Full Experiments
 
