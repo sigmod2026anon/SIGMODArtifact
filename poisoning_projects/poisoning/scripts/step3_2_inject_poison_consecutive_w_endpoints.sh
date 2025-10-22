@@ -31,12 +31,12 @@ while [[ $# -gt 0 ]]; do
             ;;
         --quick)
             QUICK_MODE=true
-            POISONING_PERCENTAGES=("${quick_POISONING_PERCENTAGES[@]}")
+            POISONING_PERCENTAGES=("${quick_POISONING_PERCENTAGES_consecutive[@]}")
             real_dataset_names=("${quick_real_dataset_names[@]}")
             sync_dataset_names=("${quick_sync_dataset_names[@]}")
-            ns=("${quick_ns[@]}")
+            ns=("${quick_ns_consecutive[@]}")
             seeds=("${quick_seeds[@]}")
-            Rs=("${quick_Rs[@]}")
+            Rs=("${quick_Rs_consecutive[@]}")
             brute_force_POISONING_PERCENTAGES=("${quick_brute_force_POISONING_PERCENTAGES[@]}")
             brute_force_ns=("${quick_brute_force_ns[@]}")
             brute_force_Rs=("${quick_brute_force_Rs[@]}")

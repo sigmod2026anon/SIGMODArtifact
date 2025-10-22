@@ -36,8 +36,6 @@ struct GenerationConfig {
     std::vector<std::string> dtypes;
 };
 
-GenerationConfig get_generation_config(bool all_mode = false);
-
 // Data generation and file output
 void generate_and_save_datasets(const GenerationConfig& config);
 

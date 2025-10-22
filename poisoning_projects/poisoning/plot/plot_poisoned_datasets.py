@@ -272,7 +272,7 @@ def create_poisoned_rank_plot_subplot(ax, config: PlotConfig, xlim=None, ylim=No
     poisoned_ranks = ranks[poisoned_mask]
 
     # print(f"legitimate: {legitimate_data}")
-    print(f"poisones: {poisoned_data}")
+    # print(f"poisones: {poisoned_data}")
     
     # Create scatter plot with blue for legitimate and red for poisoned
     if len(legitimate_data) > 0:
@@ -295,7 +295,7 @@ def create_poisoned_rank_plot_subplot(ax, config: PlotConfig, xlim=None, ylim=No
         ax.text(0.95, 0.05, f'MSE: {mse:.1f}', transform=ax.transAxes, 
                 fontsize=FONT_SIZE, ha='right', va='bottom', fontweight='bold')
 
-        print(f"MSE: mse: {mse:.20f}")
+        # print(f"MSE: mse: {mse:.20f}")
     
     # Add grid
     ax.grid(True, which='both', linestyle='--', linewidth=0.8, zorder=0)
@@ -373,8 +373,8 @@ def plot_poisoned_datasets(target_configs: List[List[PlotConfig]],
         for j, config in enumerate(row):
             ax = axes[i][j]
 
-            print()
-            print(f"config: {config.distribution} n={config.n} seed={config.seed} lambda={config.lambda_val} R={config.R} data_type={config.data_type} algorithm={config.algorithm}")
+            # print()
+            # print(f"config: {config.distribution} n={config.n} seed={config.seed} lambda={config.lambda_val} R={config.R} data_type={config.data_type} algorithm={config.algorithm}")
             
             try:
                 if config.lambda_val == 0:
@@ -383,7 +383,7 @@ def plot_poisoned_datasets(target_configs: List[List[PlotConfig]],
                     # For other rows (poisoned data), use poisoned plot function
                     create_poisoned_rank_plot_subplot(ax, config, xlim, ylim)
             
-                print()
+                # print()
                 
             except Exception as e:
                 print(f"  Error: {config.distribution} n={config.n} seed={config.seed} lambda={config.lambda_val} processing: {e}")
@@ -416,153 +416,15 @@ def plot_poisoned_datasets(target_configs: List[List[PlotConfig]],
 
 
 def main():
-    # n = 50, lambda = 5, R = 1000
-
-    # === $\mathrm{MSE}_{\mathrm{ROPT}} / \mathrm{MSE}_{\mathrm{UB}}$ ===
-    #    uniform         normal    exponential          books             fb            osm
-    # (27, 0.958459) (65, 0.920000) (42, 0.981260) (78, 0.963382) (85, 0.957001) (50, 0.960332)
-
-    # === $\mathrm{MSE}_{\mathrm{OPT}} / \mathrm{MSE}_{\mathrm{ROPT}}$ ===
-    #     uniform         normal    exponential          books             fb            osm
-    # (20, 0.989734) (10, 0.993019) (79, 0.997480) (63, 1.000000) (11, 0.964144) (84, 1.000000)
-
-    # === $\mathrm{MSE}_{\mathrm{G}} / \mathrm{MSE}_{\mathrm{OPT}}$ ===
-    #     uniform         normal   exponential          books             fb            osm
-    # (51, 0.957966) (79, 0.981299) (4, 0.998454) (78, 0.938649) (11, 0.984656) (50, 0.933132)
-
-    # # Create configurations for legitimate data (lambda=0, no algorithm needed)
-    # legitimate_configs = [
-    #     PlotConfig('uniform', 50, 51, 0, 1000, "uint64", "greedy"),  # algorithm doesn't matter for legitimate
-    #     PlotConfig('normal', 50, 79, 0, 1000, "uint64", "greedy"),
-    #     PlotConfig('exponential', 50, 4, 0, 1000, "uint64", "greedy"),
-    #     PlotConfig('books', 50, 78, 0, 0, "uint64", "greedy"),
-    #     PlotConfig('fb', 50, 11, 0, 0, "uint64", "greedy"),
-    #     PlotConfig('osm', 50, 50, 0, 0, "uint64", "greedy")
-    # ]
-
-    # target_configs = [
-    #     legitimate_configs,  # Row 1: Legitimate data only
-    #     [
-    #         PlotConfig('uniform', 50, 51, 5, 1000, "uint64", "greedy"),
-    #         PlotConfig('normal', 50, 79, 5, 1000, "uint64", "greedy"),
-    #         PlotConfig('exponential', 50, 4, 5, 1000, "uint64", "greedy"),
-    #         PlotConfig('books', 50, 78, 5, 0, "uint64", "greedy"),
-    #         PlotConfig('fb', 50, 11, 5, 0, "uint64", "greedy"),
-    #         PlotConfig('osm', 50, 50, 5, 0, "uint64", "greedy")
-    #     ],  # Row 2: Greedy poisoning
-    #     [
-    #         PlotConfig('uniform', 50, 51, 5, 1000, "uint64", "brute_force"),
-    #         PlotConfig('normal', 50, 79, 5, 1000, "uint64", "brute_force"),
-    #         PlotConfig('exponential', 50, 4, 5, 1000, "uint64", "brute_force"),
-    #         PlotConfig('books', 50, 78, 5, 0, "uint64", "brute_force"),
-    #         PlotConfig('fb', 50, 11, 5, 0, "uint64", "brute_force"),
-    #         PlotConfig('osm', 50, 50, 5, 0, "uint64", "brute_force")
-    #     ]  # Row 3: Optimal poisoning
-    # ]
-    # column_seeds = [51, 79, 4, 78, 11, 50]
-    # row_titles = ["Legitimate", "Greedy~Poisoning", "Optimal~Poisoning"]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets.pdf")
-
-
-    # # === Counter-example ===
-    # column_seeds = [0, 0, 1, 78, 11, 50]
-    # legitimate_configs = [
-    #     PlotConfig('uniform', 50, column_seeds[0], 0, 950, "uint64", "greedy"),
-    #     PlotConfig('normal', 50, column_seeds[1], 0, 950, "uint64", "greedy"),
-    #     PlotConfig('exponential', 50, column_seeds[2], 0, 950, "uint64", "greedy"),
-    #     PlotConfig('books', 50, column_seeds[3], 0, 0, "uint64", "greedy"),
-    #     PlotConfig('fb', 50, column_seeds[4], 0, 0, "uint64", "greedy"),
-    #     PlotConfig('osm', 50, column_seeds[5], 0, 0, "uint64", "greedy")
-    # ]
-    # target_configs = [
-    #     legitimate_configs,  # Row 1: Legitimate data only
-    #     [
-    #         PlotConfig('uniform', 50, column_seeds[0], 5, 950, "uint64", "greedy"),
-    #         PlotConfig('normal', 50, column_seeds[1], 5, 950, "uint64", "greedy"),
-    #         PlotConfig('exponential', 50, column_seeds[2], 5, 950, "uint64", "greedy"),
-    #         PlotConfig('books', 50, column_seeds[3], 5, 0, "uint64", "greedy"),
-    #         PlotConfig('fb', 50, column_seeds[4], 5, 0, "uint64", "greedy"),
-    #         PlotConfig('osm', 50, column_seeds[5], 5, 0, "uint64", "greedy")
-    #     ],  # Row 2: Greedy poisoning
-    #     [
-    #         PlotConfig('uniform', 50, column_seeds[0], 5, 950, "uint64", "brute_force"),
-    #         PlotConfig('normal', 50, column_seeds[1], 5, 950, "uint64", "brute_force"),
-    #         PlotConfig('exponential', 50, column_seeds[2], 5, 950, "uint64", "brute_force"),
-    #         PlotConfig('books', 50, column_seeds[3], 5, 0, "uint64", "brute_force"),
-    #         PlotConfig('fb', 50, column_seeds[4], 5, 0, "uint64", "brute_force"),
-    #         PlotConfig('osm', 50, column_seeds[5], 5, 0, "uint64", "brute_force")
-    #     ]  # Row 3: Optimal poisoning
-    # ]
-    # row_titles = ["Legitimate", "Greedy~Poisoning", "Optimal~Poisoning"]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_counter_example.pdf")
-
-    # # === Largest diff between segmend and greedy ===
-    # target_configs = [
-    #     [
-    #         PlotConfig('uniform', 1000, 9, 0, 100000, "uint64", "greedy"),
-    #         PlotConfig('uniform', 1000, 9, 200, 100000, "uint64", "greedy"),
-    #         PlotConfig('uniform', 1000, 9, 200, 100000, "uint64", "consecutive_w_endpoints"),
-    #     ]
-    # ]
-    # row_titles = [""]
-    # column_seeds = [9, 9, 9]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_uniform.pdf", (-300, 1300))
-
-    # target_configs = [
-    #     [
-    #         PlotConfig('normal', 1000, 55, 0, 100000, "uint64", "greedy"),
-    #         PlotConfig('normal', 1000, 55, 200, 100000, "uint64", "greedy"),
-    #     ]
-    # ]
-    # row_titles = [""]
-    # column_seeds = [55, 55, 55]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_normal.pdf", (-300, 1300))
-
-    # target_configs = [
-    #     [
-    #         PlotConfig('normal', 1000, 15, 0, 100000, "uint64", "greedy"),
-    #         PlotConfig('normal', 1000, 15, 200, 100000, "uint64", "greedy"),
-    #         PlotConfig('normal', 1000, 15, 200, 100000, "uint64", "consecutive_w_endpoints")
-    #     ]
-    # ]
-    # row_titles = [""]
-    # column_seeds = [15, 15, 15]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_w_endpoints_greedy_normal.pdf", (-300, 1300))
-
-    # # === Error Analysis ===
-    # target_configs = [
-    #     [
-    #         PlotConfig('books', 1000, 27, 0,  0, "uint64", "greedy"),
-    #         PlotConfig('books', 1000, 27, 20, 0, "uint64", "greedy"),
-    #         PlotConfig('books', 1000, 27, 20, 0, "uint64", "consecutive_w_endpoints"),
-    #     ]
-    # ]
-    # row_titles = [""]
-    # column_seeds = [27, 27, 27]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_error.pdf", xlim=(4.68*10**14, 4.7*10**14), ylim=(820, 860))
-
-    # # === Error Analysis 2 ===
-    # target_configs = [
-    #     [
-    #         PlotConfig('books', 1000, 21, 0,  0, "uint64", "greedy"),
-    #         PlotConfig('books', 1000, 21, 20, 0, "uint64", "greedy"),
-    #         PlotConfig('books', 1000, 21, 20, 0, "uint64", "consecutive_w_endpoints"),
-    #     ]
-    # ]
-    # row_titles = [""]
-    # column_seeds = [27, 27, 27]
-    # plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_error_2.pdf")
-
-    # === Error Analysis 3 ===
     target_configs = [
         [
-            PlotConfig('books', 1000, 50, 0,  0, "uint64", "greedy"),
-            PlotConfig('books', 1000, 50, 20, 0, "uint64", "greedy"),
-            PlotConfig('books', 1000, 50, 20, 0, "uint64", "consecutive_w_endpoints"),
+            PlotConfig('books', 1000, 0, 0,  0, "uint64", "greedy"),
+            PlotConfig('books', 1000, 0, 20, 0, "uint64", "greedy"),
+            PlotConfig('books', 1000, 0, 20, 0, "uint64", "consecutive_w_endpoints"),
         ]
     ]
     row_titles = [""]
-    column_seeds = [50, 50, 50]
+    column_seeds = [0, 0, 0]
     plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_error_3.pdf", xlim=(4.6245e12, 4.6255e12), ylim=(220, 280))
 
 

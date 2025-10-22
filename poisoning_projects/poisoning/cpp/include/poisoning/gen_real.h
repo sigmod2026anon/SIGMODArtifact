@@ -34,11 +34,9 @@ public:
     // Template function: Sample from dataset
     template<typename T>
     std::vector<T> sample_from_dataset(const std::vector<T>& original_data, 
-                                      size_t n, 
-                                      std::uint64_t seed);
+                                        size_t n, 
+                                        std::uint64_t seed);
 };
-
-RealSamplingConfig get_real_sampling_config(bool all_mode = false);
 
 // Sample real data and save to file
 void sample_and_save_real_datasets(const RealSamplingConfig& config);

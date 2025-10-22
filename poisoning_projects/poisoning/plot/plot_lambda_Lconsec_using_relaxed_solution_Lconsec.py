@@ -218,7 +218,7 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data using load_loss_comparison
-    print("Loading comparison data...")
+    # print("Loading comparison data...")
     consecutive_w_endpoints_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints")
     consecutive_w_endpoints_using_relaxed_solution_df = load_loss(data_dir, approach="consecutive_w_endpoints_using_relaxed_solution")
     
@@ -226,9 +226,9 @@ if __name__ == '__main__':
         print("Error: No data loaded")
         exit(1)
     
-    print(f"Loaded data:")
-    print(f"  Consecutive with endpoints: {len(consecutive_w_endpoints_df)} rows")
-    print(f"  Consecutive with endpoints using relaxed solution: {len(consecutive_w_endpoints_using_relaxed_solution_df)} rows")
+    # print(f"Loaded data:")
+    # print(f"  Consecutive with endpoints: {len(consecutive_w_endpoints_df)} rows")
+    # print(f"  Consecutive with endpoints using relaxed solution: {len(consecutive_w_endpoints_using_relaxed_solution_df)} rows")
     
     # Filter for n=1000 only
     ns = [1000]

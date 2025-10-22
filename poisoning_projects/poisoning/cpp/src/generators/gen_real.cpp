@@ -24,38 +24,6 @@ std::vector<T> RealDataSampler::sample_from_dataset(const std::vector<T>& origin
     return result;
 }
 
-RealSamplingConfig get_real_sampling_config(bool all_mode) {
-    RealSamplingConfig config;
-    
-    if (all_mode) {
-        config.datasets = {
-            {"books_200M", 200000000, "uint64"},
-            {"fb_200M", 200000000, "uint64"},
-            {"osm_cellids_200M", 200000000, "uint64"},
-        };
-        config.ns = {100, 200, 500, 1000, 2000, 5000, 10000};
-        
-        // Seeds 0-99
-        for (std::uint64_t i = 0; i < 100; ++i) {
-            config.seeds.push_back(i);
-        }
-    } else {
-        // Quick mode: Generate minimum real data
-        config.datasets = {
-            {"books_200M", 200000000, "uint64"},
-            {"fb_200M", 200000000, "uint64"},
-        };
-        config.ns = {100, 1000, 5000};  // Only one sample size
-        
-        // Seeds 0-2
-        for (std::uint64_t i = 0; i < 3; ++i) {
-            config.seeds.push_back(i);
-        }
-    }
-    
-    return config;
-}
-
 void sample_and_save_real_datasets(const RealSamplingConfig& config) {
     sample_and_save_real_datasets(config, "../../../data/");
 }

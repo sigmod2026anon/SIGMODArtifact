@@ -29,9 +29,6 @@ add_executable(calc_loss apps/calc_loss_main.cpp)
 add_executable(gen_sync apps/gen_sync_main.cpp)
 add_executable(gen_real apps/gen_real_main.cpp)
 
-# Executables for quick test
-add_executable(poisoning_quick_test apps/poisoning_quick_test_main.cpp)
-
 # Add inject_poison executable  
 add_executable(inject_poison apps/inject_poison_main.cpp)
 
@@ -75,7 +72,6 @@ set(POISONING_TARGETS
     inject_poison_consecutive_w_endpoints_duplicate_allowed
     inject_poison_consecutive_w_endpoints_using_relaxed_solution
     calc_upper_bound_binary calc_upper_bound_golden calc_upper_bound_strict
-    poisoning_quick_test
     calc_optimal_poison calc_optimal_poison_duplicate_allowed
 )
 foreach(target ${POISONING_TARGETS})

@@ -161,9 +161,9 @@ def main():
     df_results = load_loss(data_dir)
     df_upper_bound = load_upper_bound(data_dir)
     
-    print("Data loading complete")
-    print(f"Result data: {len(df_results)} rows")
-    print(f"Upper bound data: {len(df_upper_bound)} rows")
+    # print("Data loading complete")
+    # print(f"Result data: {len(df_results)} rows")
+    # print(f"Upper bound data: {len(df_upper_bound)} rows")
     
     # Analyze differences between algorithms
     analyze_algorithm_differences(df_results, df_upper_bound)

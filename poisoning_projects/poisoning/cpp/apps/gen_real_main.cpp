@@ -85,8 +85,6 @@ int main(int argc, char* argv[]) {
     std::vector<size_t> ns;
     std::vector<std::uint64_t> seeds;
     
-    bool has_params = false;
-    
     // Parse command line arguments
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
@@ -96,13 +94,10 @@ int main(int argc, char* argv[]) {
             for (const auto& spec : dataset_specs) {
                 real_datasets.push_back(parse_dataset_info(spec));
             }
-            has_params = true;
         } else if (arg == "--ns" && i + 1 < argc) {
             ns = parse_size_t_vector(argv[++i]);
-            has_params = true;
         } else if (arg == "--seeds" && i + 1 < argc) {
             seeds = parse_uint64_vector(argv[++i]);
-            has_params = true;
         } else if (arg == "--help" || arg == "-h") {
             std::cout << "Usage: " << argv[0] << " [parameters]\\n";
             std::cout << "Real dataset sampling tool\\n\\n";
@@ -127,27 +122,19 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    if (!has_params) {
-        std::cerr << "Error: At least one parameter must be specified." << std::endl;
-        std::cerr << "Use --help for usage information." << std::endl;
+    if (real_datasets.empty() || ns.empty() || seeds.empty()) {
+        std::cerr << "Error: Please specify --real_dataset_names, --ns, and --seeds." << std::endl;
         return 1;
     }
     
     try {
         // Get default settings
-        poisoning::RealSamplingConfig config = poisoning::get_real_sampling_config(false); // quick mode as default
-        
-        // Override with custom parameters
-        if (!real_datasets.empty()) {
-            config.datasets = real_datasets;
-        }
-        if (!ns.empty()) {
-            config.ns = ns;
-        }
-        if (!seeds.empty()) {
-            config.seeds = seeds;
-        }
-        
+        poisoning::RealSamplingConfig config = {
+            real_datasets,
+            ns,
+            seeds
+        };
+
         std::cout << "=== Real Dataset Sampling (C++ Implementation) ===" << std::endl;
         std::cout << "Datasets to process: " << config.datasets.size() << std::endl;
         for (const auto& dataset : config.datasets) {

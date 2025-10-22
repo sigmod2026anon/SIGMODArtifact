@@ -222,7 +222,7 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data using load_loss_comparison and load_upper_bound
-    print("Loading comparison data...")
+    # print("Loading comparison data...")
     consecutive_w_endpoints_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints")
     df_upper_bound = load_upper_bound(data_dir)
     
@@ -230,9 +230,9 @@ if __name__ == '__main__':
         print("Error: No data loaded")
         exit(1)
     
-    print(f"Loaded data:")
-    print(f"  Consecutive with endpoints: {len(consecutive_w_endpoints_df)} rows")
-    print(f"  Upper bound: {len(df_upper_bound)} rows")
+    # print(f"Loaded data:")
+    # print(f"  Consecutive with endpoints: {len(consecutive_w_endpoints_df)} rows")
+    # print(f"  Upper bound: {len(df_upper_bound)} rows")
     
     # Filter for n=1000 only
     ns = [1000]

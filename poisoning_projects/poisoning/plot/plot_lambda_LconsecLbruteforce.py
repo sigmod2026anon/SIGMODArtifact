@@ -230,10 +230,10 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data
-    print("Loading consecutive with endpoints data...")
+    # print("Loading consecutive with endpoints data...")
     consecutive_w_endpoints_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints")
     
-    print("Loading optimal poison data...")
+    # print("Loading optimal poison data...")
     df_optimal_poison = load_optimal_poison(data_dir)
     
     if consecutive_w_endpoints_df.empty or df_optimal_poison.empty:

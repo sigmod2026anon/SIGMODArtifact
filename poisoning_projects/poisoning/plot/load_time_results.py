@@ -38,7 +38,7 @@ def load_injection_time_results(base_dir, approaches=None):
             print(f"Warning: Directory not found: {injection_dir}")
             continue
         
-        print(f"Loading {approach} time results from: {injection_dir}")
+        # print(f"Loading {approach} time results from: {injection_dir}")
         
         # Get files matching JSON file pattern
         json_files = glob.glob(os.path.join(injection_dir, "**/*.json"), recursive=True)
@@ -68,7 +68,7 @@ def load_injection_time_results(base_dir, approaches=None):
         
         if results:
             all_results.extend(results)
-            print(f"Loaded {len(results)} results for {approach}")
+            # print(f"Loaded {len(results)} results for {approach}")
     
     if not all_results:
         raise FileNotFoundError("No valid injection time results found")
@@ -89,7 +89,7 @@ def load_upper_bound_time_results(base_dir):
     if not os.path.exists(upper_bound_dir):
         raise FileNotFoundError(f"Upper bound directory not found: {upper_bound_dir}")
     
-    print(f"Loading upper bound time results from: {upper_bound_dir}")
+    # print(f"Loading upper bound time results from: {upper_bound_dir}")
     
     # Get files matching JSON file pattern
     json_files = glob.glob(os.path.join(upper_bound_dir, "**/*.json"), recursive=True)

@@ -77,6 +77,8 @@ if [ "$ALL_MODE" = true ]; then
     Rs_param=$(join_by_comma "${all_Rs[@]}")
     brute_force_ns_param=$(join_by_comma "${all_brute_force_ns[@]}")
     brute_force_Rs_param=$(join_by_comma "${all_brute_force_Rs[@]}")
+    ns_consecutive_param=$(join_by_comma "${all_ns_consecutive[@]}")
+    Rs_consecutive_param=$(join_by_comma "${all_Rs_consecutive[@]}")
 else
     # Use quick_ prefixed arrays
     real_datasets_param=$(join_by_comma "${quick_real_dataset_names[@]}")
@@ -86,6 +88,8 @@ else
     Rs_param=$(join_by_comma "${quick_Rs[@]}")
     brute_force_ns_param=$(join_by_comma "${quick_brute_force_ns[@]}")
     brute_force_Rs_param=$(join_by_comma "${quick_brute_force_Rs[@]}")
+    ns_consecutive_param=$(join_by_comma "${quick_ns_consecutive[@]}")
+    Rs_consecutive_param=$(join_by_comma "${quick_Rs_consecutive[@]}")
 fi
 
 # Generate real datasets
@@ -113,6 +117,18 @@ echo ""
     --ns "$brute_force_ns_param" \
     --seeds "$seeds_param"
 
+echo "  Generating real datasets for consecutive approach..."
+echo "    Parameters:"
+echo "      Real datasets: $real_datasets_param"
+echo "      Sample sizes: $ns_consecutive_param"
+echo "      Seeds: $seeds_param"
+echo ""
+
+./gen_real \
+    --real_dataset_names "$real_datasets_param" \
+    --ns "$ns_consecutive_param" \
+    --seeds "$seeds_param"
+
 # Generate synthetic datasets  
 echo "  [SYNTH] Generating synthetic datasets for brute force..."
 echo "    Parameters:"
@@ -133,6 +149,28 @@ echo ""
 ./gen_sync \
     --sync_dataset_names "$sync_datasets_param" \
     --ns "$ns_param" \
+    --seeds "$seeds_param" \
+    --Rs "$base_R"
+
+echo "  [SYNTH] Generating synthetic datasets for consecutive approach..."
+echo "    Parameters:"
+echo "      Sync datasets: $sync_datasets_param"
+echo "      Sample sizes: $ns_consecutive_param"
+echo "      Seeds: $seeds_param"
+echo "      Range values: $Rs_consecutive_param"
+echo ""
+
+## base_n, Rs_consecutive_param
+./gen_sync \
+    --sync_dataset_names "$sync_datasets_param" \
+    --ns "$base_n" \
+    --seeds "$seeds_param" \
+    --Rs "$Rs_consecutive_param"
+
+## ns_consecutive_param, base_R
+./gen_sync \
+    --sync_dataset_names "$sync_datasets_param" \
+    --ns "$ns_consecutive_param" \
     --seeds "$seeds_param" \
     --Rs "$base_R"
 

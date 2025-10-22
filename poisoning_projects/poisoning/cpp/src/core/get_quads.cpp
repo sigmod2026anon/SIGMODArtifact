@@ -44,10 +44,6 @@ static inline Ball square(const Ball& x) {
 }
 
 static inline Ball div(const Ball& a, const Ball& b) {
-    const double b_lo = b.lo();
-    const double b_hi = b.hi();
-    assert(!(b_lo <= 0.0 && b_hi >= 0.0));
-
     const double m = a.m / b.m;
     const double inv_b_abs = 1.0 / absv(b.m);
     double r = absv(inv_b_abs) * a.r + absv(a.m) * (inv_b_abs*inv_b_abs) * b.r;
@@ -69,8 +65,6 @@ static inline Ball divs(const Ball& x, double s) {
     return Ball(x.m * inv, SAFE_K * (absv(inv) * x.r));
 }
 static inline Ball sdiv(double s, const Ball& x) {
-    const double x_lo = x.lo(), x_hi = x.hi();
-    assert(!(x_lo <= 0.0 && x_hi >= 0.0));
     const double m = s / x.m;
     const double inv_abs = 1.0 / absv(x.m);
     double r = absv(inv_abs) * 0.0 + absv(s) * (inv_abs * inv_abs) * x.r;

@@ -365,7 +365,7 @@ std::vector<std::uint64_t> get_poison_values_consecutive_no_endpoint_using_relax
     auto prep_right = PreprocessRight(data, poison_num);
 
     double best_loss = -1.0 * std::numeric_limits<double>::infinity();
-    size_t best_i_left;
+    size_t best_i_left = 0;
     bool best_is_left = false;
     for (size_t i_left = 0; i_left < n; ++i_left) {
         auto [Sx, Sxx, Sxy, L] = prep_left.get_sums(i_left, poison_num);
@@ -383,7 +383,7 @@ std::vector<std::uint64_t> get_poison_values_consecutive_no_endpoint_using_relax
         }
     }
 
-    size_t best_i_right;
+    size_t best_i_right = 0;
     for (size_t i_right = 0; i_right < n; ++i_right) {
         auto [Sx, Sxx, Sxy, R] = prep_right.get_sums(i_right, poison_num);
 

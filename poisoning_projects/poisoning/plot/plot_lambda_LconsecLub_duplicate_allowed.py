@@ -111,7 +111,7 @@ def plot_lambda_LconsecLub_duplicate_allowed(consecutive_w_endpoints_duplicate_a
             min_idx = group_data['LconsecE_duplicate_allowed_divided_by_Lub'].idxmin()
             min_row = group_data.loc[min_idx]
             print(f"  Lambda={min_row['lambda']} ({percentage:.1f}%): Min LconsecE_duplicate_allowed/Lub = {min_row['LconsecE_duplicate_allowed_divided_by_Lub']:.30f} (seed={min_row['seed']})")
-            print(f"    Consecutive with endpoints duplicate_allowed loss: {min_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Upper bound loss: {min_row['upper_bound_loss']:.30f}")
+            # print(f"    Consecutive with endpoints duplicate_allowed loss: {min_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Upper bound loss: {min_row['upper_bound_loss']:.30f}")
         
         print(f"\n=== Maximum LconsecE_duplicate_allowed/Lub values for {dataset_name}, {data_type}, R={R} ===")
         for percentage in sorted(merged_data['percentage'].unique()):
@@ -119,7 +119,7 @@ def plot_lambda_LconsecLub_duplicate_allowed(consecutive_w_endpoints_duplicate_a
             max_idx = group_data['LconsecE_duplicate_allowed_divided_by_Lub'].idxmax()
             max_row = group_data.loc[max_idx]
             print(f"  Lambda={max_row['lambda']} ({percentage:.1f}%): Max LconsecE_duplicate_allowed/Lub = {max_row['LconsecE_duplicate_allowed_divided_by_Lub']:.30f} (seed={max_row['seed']})")
-            print(f"    Consecutive with endpoints duplicate_allowed loss: {max_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Upper bound loss: {max_row['upper_bound_loss']:.30f}")
+            # print(f"    Consecutive with endpoints duplicate_allowed loss: {max_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Upper bound loss: {max_row['upper_bound_loss']:.30f}")
 
         # Update global statistics
         all_lconsecE_lub_ratios.extend(merged_data['LconsecE_duplicate_allowed_divided_by_Lub'].tolist())
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data using load_loss_comparison and load_upper_bound
-    print("Loading comparison duplicate_allowed data...")
+    # print("Loading comparison duplicate_allowed data...")
     consecutive_w_endpoints_duplicate_allowed_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints_duplicate_allowed")
     df_upper_bound = load_upper_bound(data_dir)
     
@@ -233,9 +233,9 @@ if __name__ == '__main__':
         print("Error: No data loaded")
         exit(1)
     
-    print(f"Loaded data:")
-    print(f"  Consecutive with endpoints duplicate_allowed: {len(consecutive_w_endpoints_duplicate_allowed_df)} rows")
-    print(f"  Upper bound: {len(df_upper_bound)} rows")
+    # print(f"Loaded data:")
+    # print(f"  Consecutive with endpoints duplicate_allowed: {len(consecutive_w_endpoints_duplicate_allowed_df)} rows")
+    # print(f"  Upper bound: {len(df_upper_bound)} rows")
     
     # Filter for n=1000 only
     ns = [1000]

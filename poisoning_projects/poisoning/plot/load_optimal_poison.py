@@ -17,8 +17,8 @@ def load_optimal_poison(base_dir):
     if not os.path.exists(optimal_poison_duplicate_allowed_dir):
         raise FileNotFoundError(f"Optimal poison duplicate allowed directory not found: {optimal_poison_duplicate_allowed_dir}")
     
-    print(f"Loading optimal poison results from: {optimal_poison_dir}")
-    print(f"Loading optimal poison duplicate allowed results from: {optimal_poison_duplicate_allowed_dir}")
+    # print(f"Loading optimal poison results from: {optimal_poison_dir}")
+    # print(f"Loading optimal poison duplicate allowed results from: {optimal_poison_duplicate_allowed_dir}")
     
     # Get files matching JSON file pattern for both directories
     json_files = glob.glob(os.path.join(optimal_poison_dir, "**/*.json"), recursive=True)

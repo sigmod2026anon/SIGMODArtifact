@@ -112,7 +112,7 @@ def plot_lambda_LconsecLbruteforce_duplicate_allowed(consecutive_w_endpoints_dup
             min_idx = group_data['LconsecE_duplicate_allowed_divided_by_LbruteForce_duplicate_allowed'].idxmin()
             min_row = group_data.loc[min_idx]
             print(f"  Lambda={min_row['lambda']} ({percentage:.1f}%): Min LconsecE_duplicate_allowed/LbruteForce_duplicate_allowed = {min_row['LconsecE_duplicate_allowed_divided_by_LbruteForce_duplicate_allowed']:.30f} (seed={min_row['seed']})")
-            print(f"    Consecutive with endpoints duplicate_allowed loss: {min_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Brute force duplicate_allowed loss: {min_row['brute_force_duplicate_allowed_loss']:.30f}")
+            # print(f"    Consecutive with endpoints duplicate_allowed loss: {min_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Brute force duplicate_allowed loss: {min_row['brute_force_duplicate_allowed_loss']:.30f}")
         
         print(f"\n=== Maximum LconsecE_duplicate_allowed/LbruteForce_duplicate_allowed values for {dataset_name}, {data_type}, R={R} ===")
         for percentage in sorted(merged_data['percentage'].unique()):
@@ -120,7 +120,7 @@ def plot_lambda_LconsecLbruteforce_duplicate_allowed(consecutive_w_endpoints_dup
             max_idx = group_data['LconsecE_duplicate_allowed_divided_by_LbruteForce_duplicate_allowed'].idxmax()
             max_row = group_data.loc[max_idx]
             print(f"  Lambda={max_row['lambda']} ({percentage:.1f}%): Max LconsecE_duplicate_allowed/LbruteForce_duplicate_allowed = {max_row['LconsecE_duplicate_allowed_divided_by_LbruteForce_duplicate_allowed']:.30f} (seed={max_row['seed']})")
-            print(f"    Consecutive with endpoints duplicate_allowed loss: {max_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Brute force duplicate_allowed loss: {max_row['brute_force_duplicate_allowed_loss']:.30f}")
+            # print(f"    Consecutive with endpoints duplicate_allowed loss: {max_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}, Brute force duplicate_allowed loss: {max_row['brute_force_duplicate_allowed_loss']:.30f}")
 
         # Update global statistics
         all_lconsecE_lbruteforce_ratios.extend(merged_data['LconsecE_duplicate_allowed_divided_by_LbruteForce_duplicate_allowed'].tolist())
@@ -228,19 +228,19 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data
-    print("Loading consecutive with endpoints duplicate_allowed data...")
+    # print("Loading consecutive with endpoints duplicate_allowed data...")
     consecutive_w_endpoints_duplicate_allowed_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints_duplicate_allowed")
     
-    print("Loading optimal poison duplicate_allowed data...")
+    # print("Loading optimal poison duplicate_allowed data...")
     df_optimal_poison_duplicate_allowed = load_optimal_poison(data_dir)
     
     if consecutive_w_endpoints_duplicate_allowed_df.empty or df_optimal_poison_duplicate_allowed.empty:
         print("Error: No data loaded")
         exit(1)
     
-    print(f"Loaded data:")
-    print(f"  Consecutive with endpoints duplicate_allowed: {len(consecutive_w_endpoints_duplicate_allowed_df)} rows")
-    print(f"  Optimal poison duplicate_allowed: {len(df_optimal_poison_duplicate_allowed)} rows")
+    # print(f"Loaded data:")
+    # print(f"  Consecutive with endpoints duplicate_allowed: {len(consecutive_w_endpoints_duplicate_allowed_df)} rows")
+    # print(f"  Optimal poison duplicate_allowed: {len(df_optimal_poison_duplicate_allowed)} rows")
     
     # Filter for n=50 only
     ns = [50]

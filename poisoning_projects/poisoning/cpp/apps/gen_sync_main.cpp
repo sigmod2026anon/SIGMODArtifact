@@ -61,23 +61,17 @@ int main(int argc, char* argv[]) {
         std::vector<std::uint64_t> seeds;
         std::vector<std::uint64_t> Rs;
         
-        bool has_params = false;
-        
         // Parse command line arguments
         for (int i = 1; i < argc; ++i) {
             std::string arg = argv[i];
             if (arg == "--sync_dataset_names" && i + 1 < argc) {
                 sync_dataset_names = split_string(argv[++i], ',');
-                has_params = true;
             } else if (arg == "--ns" && i + 1 < argc) {
                 ns = parse_size_t_vector(argv[++i]);
-                has_params = true;
             } else if (arg == "--seeds" && i + 1 < argc) {
                 seeds = parse_uint64_vector(argv[++i]);
-                has_params = true;
             } else if (arg == "--Rs" && i + 1 < argc) {
                 Rs = parse_uint64_vector(argv[++i]);
-                has_params = true;
             } else if (arg == "--help" || arg == "-h") {
                 std::cout << "Usage: " << argv[0] << " [parameters]\\n";
                 std::cout << "Synthetic dataset generation tool\\n\\n";
@@ -99,28 +93,19 @@ int main(int argc, char* argv[]) {
             }
         }
         
-        if (!has_params) {
-            std::cerr << "Error: At least one parameter must be specified." << std::endl;
-            std::cerr << "Use --help for usage information." << std::endl;
+        if (sync_dataset_names.empty() || ns.empty() || seeds.empty() || Rs.empty()) {
+            std::cerr << "Error: Please specify --sync_dataset_names, --ns, --seeds, and --Rs." << std::endl;
             return 1;
         }
         
         // Get default settings
-        auto config = poisoning::get_generation_config(false); // quick mode as default
-        
-        // Override with custom parameters
-        if (!sync_dataset_names.empty()) {
-            config.distributions = sync_dataset_names;
-        }
-        if (!ns.empty()) {
-            config.ns = ns;
-        }
-        if (!seeds.empty()) {
-            config.seeds = seeds;
-        }
-        if (!Rs.empty()) {
-            config.Rs = Rs;
-        }
+        poisoning::GenerationConfig config = {
+            sync_dataset_names,
+            ns,
+            seeds,
+            Rs,
+            {"uint64"}
+        };
         
         std::cout << "=== Synthetic Dataset Generation ===" << std::endl;
         std::cout << "Distributions: ";

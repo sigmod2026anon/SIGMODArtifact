@@ -77,34 +77,6 @@ std::vector<T> DataGenerator::generate_exponential(size_t n, T R) {
     return normalize_and_process(raw_data, R);
 }
 
-GenerationConfig get_generation_config(bool all_mode) {
-    GenerationConfig config;
-    
-    if (all_mode) {
-        config.distributions = {"uniform", "normal", "exponential"};
-        config.ns = {100, 200, 500, 1000, 2000, 5000, 10000};
-        config.Rs = {1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000};
-        config.dtypes = {"uint64"};
-        
-        // Seed 0~99
-        for (std::uint64_t i = 0; i < 100; ++i) {
-            config.seeds.push_back(i);
-        }
-    } else {
-        config.distributions = {"uniform", "normal"};
-        config.ns = {100, 1000, 5000};
-        config.Rs = {1000, 10000, 100000};
-        config.dtypes = {"uint64"};
-        
-        // Seed 0~2
-        for (std::uint64_t i = 0; i < 3; ++i) {
-            config.seeds.push_back(i);
-        }
-    }
-    
-    return config;
-}
-
 void generate_and_save_datasets(const GenerationConfig& config) {
     generate_and_save_datasets(config, "../../../data/");
 }

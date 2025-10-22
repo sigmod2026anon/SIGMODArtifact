@@ -13,7 +13,7 @@ def load_upper_bound(base_dir):
     if not os.path.exists(upper_bound_dir):
         raise FileNotFoundError(f"Upper bound directory not found: {upper_bound_dir}")
     
-    print(f"Loading upper bounds from: {upper_bound_dir}")
+    # print(f"Loading upper bounds from: {upper_bound_dir}")
     
     # Get files matching JSON file pattern
     json_files = glob.glob(os.path.join(upper_bound_dir, "**/*.json"), recursive=True)

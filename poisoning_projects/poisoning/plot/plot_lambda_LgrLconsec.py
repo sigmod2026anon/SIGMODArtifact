@@ -102,7 +102,7 @@ def plot_lambda_LgrLconsec(original_df, consecutive_w_endpoints_df, fig_path, n=
             min_idx = group_data['Lgr_divided_by_LconsecE'].idxmin()
             min_row = group_data.loc[min_idx]
             print(f"  Lambda={min_row['lambda']} ({percentage:.1f}%): Min Lgr/LconsecE = {min_row['Lgr_divided_by_LconsecE']:.30f} (seed={min_row['seed']})")
-            print(f"    Original loss: {min_row['original_loss']:.30f}, Consecutive with endpoints loss: {min_row['consecutive_w_endpoints_loss']:.30f}")
+            # print(f"    Original loss: {min_row['original_loss']:.30f}, Consecutive with endpoints loss: {min_row['consecutive_w_endpoints_loss']:.30f}")
         
         print(f"\n=== Maximum Lgr/LconsecE values for {dataset_name}, {data_type}, R={R} ===")
         for percentage in sorted(merged_data['percentage'].unique()):
@@ -110,7 +110,7 @@ def plot_lambda_LgrLconsec(original_df, consecutive_w_endpoints_df, fig_path, n=
             max_idx = group_data['Lgr_divided_by_LconsecE'].idxmax()
             max_row = group_data.loc[max_idx]
             print(f"  Lambda={max_row['lambda']} ({percentage:.1f}%): Max Lgr/LconsecE = {max_row['Lgr_divided_by_LconsecE']:.30f} (seed={max_row['seed']})")
-            print(f"    Original loss: {max_row['original_loss']:.30f}, Consecutive with endpoints loss: {max_row['consecutive_w_endpoints_loss']:.30f}")
+            # print(f"    Original loss: {max_row['original_loss']:.30f}, Consecutive with endpoints loss: {max_row['consecutive_w_endpoints_loss']:.30f}")
 
         # Update global statistics
         all_lgr_lconsecE_ratios.extend(merged_data['Lgr_divided_by_LconsecE'].tolist())
@@ -215,7 +215,7 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data using load_loss_comparison
-    print("Loading comparison data...")
+    # print("Loading comparison data...")
     original_df = load_loss(data_dir)
     consecutive_w_endpoints_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints")
     
@@ -223,9 +223,9 @@ if __name__ == '__main__':
         print("Error: No data loaded")
         exit(1)
     
-    print(f"Loaded data:")
-    print(f"  Original: {len(original_df)} rows")
-    print(f"  Consecutive with endpoints: {len(consecutive_w_endpoints_df)} rows")
+    # print(f"Loaded data:")
+    # print(f"  Original: {len(original_df)} rows")
+    # print(f"  Consecutive with endpoints: {len(consecutive_w_endpoints_df)} rows")
     
     # Filter for n=1000 only
     ns = [1000]

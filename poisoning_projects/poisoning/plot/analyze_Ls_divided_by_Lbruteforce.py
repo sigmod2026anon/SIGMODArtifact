@@ -58,7 +58,7 @@ def main():
     Rs = [0, 1000]
     algorithm="binary_search"
 
-    print("Loading data...")
+    # print("Loading data...")
     df_greedy_loss = load_loss(data_dir)
     df_greedy_relaxed_loss = load_loss(data_dir, approach="duplicate_allowed")
     df_sege_loss = load_loss(data_dir, approach="consecutive_w_endpoints")

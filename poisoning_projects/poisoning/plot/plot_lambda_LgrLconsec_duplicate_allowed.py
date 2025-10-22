@@ -102,7 +102,7 @@ def plot_lambda_LgrLconsec_duplicate_allowed(original_duplicate_allowed_df, cons
             min_idx = group_data['Lgr_duplicate_allowed_divided_by_LconsecE_duplicate_allowed'].idxmin()
             min_row = group_data.loc[min_idx]
             print(f"  Lambda={min_row['lambda']} ({percentage:.1f}%): Min Lgr_duplicate_allowed/LconsecE_duplicate_allowed = {min_row['Lgr_duplicate_allowed_divided_by_LconsecE_duplicate_allowed']:.30f} (seed={min_row['seed']})")
-            print(f"    Original duplicate_allowed loss: {min_row['original_duplicate_allowed_loss']:.30f}, Consecutive with endpoints duplicate_allowed loss: {min_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}")
+            # print(f"    Original duplicate_allowed loss: {min_row['original_duplicate_allowed_loss']:.30f}, Consecutive with endpoints duplicate_allowed loss: {min_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}")
         
         print(f"\n=== Maximum Lgr_duplicate_allowed/LconsecE_duplicate_allowed values for {dataset_name}, {data_type}, R={R} ===")
         for percentage in sorted(merged_data['percentage'].unique()):
@@ -110,7 +110,7 @@ def plot_lambda_LgrLconsec_duplicate_allowed(original_duplicate_allowed_df, cons
             max_idx = group_data['Lgr_duplicate_allowed_divided_by_LconsecE_duplicate_allowed'].idxmax()
             max_row = group_data.loc[max_idx]
             print(f"  Lambda={max_row['lambda']} ({percentage:.1f}%): Max Lgr_duplicate_allowed/LconsecE_duplicate_allowed = {max_row['Lgr_duplicate_allowed_divided_by_LconsecE_duplicate_allowed']:.30f} (seed={max_row['seed']})")
-            print(f"    Original duplicate_allowed loss: {max_row['original_duplicate_allowed_loss']:.30f}, Consecutive with endpoints duplicate_allowed loss: {max_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}")
+            # print(f"    Original duplicate_allowed loss: {max_row['original_duplicate_allowed_loss']:.30f}, Consecutive with endpoints duplicate_allowed loss: {max_row['consecutive_w_endpoints_duplicate_allowed_loss']:.30f}")
 
         # Update global statistics
         all_lgr_lconsecE_ratios.extend(merged_data['Lgr_duplicate_allowed_divided_by_LconsecE_duplicate_allowed'].tolist())
@@ -215,7 +215,7 @@ if __name__ == '__main__':
     data_dir = ".."
     
     # Load data using load_loss_comparison
-    print("Loading comparison duplicate_allowed data...")
+    # print("Loading comparison duplicate_allowed data...")
     original_duplicate_allowed_df = load_loss(data_dir, duplicate_allowed=True)
     consecutive_w_endpoints_duplicate_allowed_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints_duplicate_allowed")
     
@@ -223,9 +223,9 @@ if __name__ == '__main__':
         print("Error: No data loaded")
         exit(1)
     
-    print(f"Loaded data:")
-    print(f"  Original duplicate_allowed: {len(original_duplicate_allowed_df)} rows")
-    print(f"  Consecutive with endpoints duplicate_allowed: {len(consecutive_w_endpoints_duplicate_allowed_df)} rows")
+    # print(f"Loaded data:")
+    # print(f"  Original duplicate_allowed: {len(original_duplicate_allowed_df)} rows")
+    # print(f"  Consecutive with endpoints duplicate_allowed: {len(consecutive_w_endpoints_duplicate_allowed_df)} rows")
     
     # Filter for n=1000 only
     ns = [1000]

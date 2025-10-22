@@ -34,11 +34,14 @@ while [[ $# -gt 0 ]]; do
         --quick)
             QUICK_MODE=true
             POISONING_PERCENTAGES=("${quick_POISONING_PERCENTAGES[@]}")
+            POISONING_PERCENTAGES_consecutive=("${quick_POISONING_PERCENTAGES_consecutive[@]}")
             real_dataset_names=("${quick_real_dataset_names[@]}")
             sync_dataset_names=("${quick_sync_dataset_names[@]}")
             ns=("${quick_ns[@]}")
+            ns_consecutive=("${quick_ns_consecutive[@]}")
             seeds=("${quick_seeds[@]}")
             Rs=("${quick_Rs[@]}")
+            Rs_consecutive=("${quick_Rs_consecutive[@]}")
             brute_force_POISONING_PERCENTAGES=("${quick_brute_force_POISONING_PERCENTAGES[@]}")
             brute_force_ns=("${quick_brute_force_ns[@]}")
             brute_force_Rs=("${quick_brute_force_Rs[@]}")
@@ -318,25 +321,6 @@ process_sync_datasets_loss() {
     done
 }
 
-# Function to process real datasets with given parameters (consecutive approach)
-process_real_datasets_consecutive_loss() {
-    local n_val="$1"
-    local percentage="$2"
-    local poison_num=$((n_val * percentage / 100))
-    
-    for real_dataset_name in "${real_dataset_names[@]}"; do
-        for seed in "${seeds[@]}"; do
-            for dtype in "uint64"; do
-                # Calculate loss for poisoned datasets using consecutive approach
-                echo "Processing: $real_dataset_name n=$n_val seed=$seed dtype=$dtype percentage=$percentage (consecutive)"
-                input_file_name="${real_dataset_name}_n${n_val}_seed${seed}_lambda${poison_num}_consecutive_${dtype}"
-                base_output_name="${real_dataset_name}_n${n_val}_seed${seed}_lambda${poison_num}_consecutive_percentage${percentage}_${dtype}"
-                run_calc_loss_consecutive "$input_file_name" "$poison_num" "$base_output_name" "$real_dataset_name" "$n_val"
-            done
-        done
-    done
-}
-
 # Function to process real datasets with given parameters (consecutive with endpoints approach)
 process_real_datasets_consecutive_w_endpoints_loss() {
     local n_val="$1"
@@ -351,26 +335,6 @@ process_real_datasets_consecutive_w_endpoints_loss() {
                 input_file_name="${real_dataset_name}_n${n_val}_seed${seed}_lambda${poison_num}_consecutive_w_endpoints_${dtype}"
                 base_output_name="${real_dataset_name}_n${n_val}_seed${seed}_lambda${poison_num}_consecutive_w_endpoints_percentage${percentage}_${dtype}"
                 run_calc_loss_consecutive_w_endpoints "$input_file_name" "$poison_num" "$base_output_name" "$real_dataset_name" "$n_val"
-            done
-        done
-    done
-}
-
-# Function to process synthetic datasets with given parameters (consecutive approach)
-process_sync_datasets_consecutive_loss() {
-    local n_val="$1"
-    local R_val="$2"
-    local percentage="$3"
-    local poison_num=$((n_val * percentage / 100))
-    
-    for sync_dataset_name in "${sync_dataset_names[@]}"; do
-        for seed in "${seeds[@]}"; do
-            for dtype in "uint64"; do
-                # Calculate loss for poisoned datasets using consecutive approach
-                echo "Processing: $sync_dataset_name n=$n_val R=$R_val seed=$seed dtype=$dtype percentage=$percentage (consecutive)"
-                input_file_name="${sync_dataset_name}_n${n_val}_R${R_val}_seed${seed}_lambda${poison_num}_consecutive_${dtype}"
-                base_output_name="${sync_dataset_name}_n${n_val}_R${R_val}_seed${seed}_lambda${poison_num}_consecutive_percentage${percentage}_${dtype}"
-                run_calc_loss_consecutive "$input_file_name" "$poison_num" "$base_output_name" "$sync_dataset_name" "$n_val"
             done
         done
     done
@@ -530,8 +494,6 @@ done
 
 for n in "${ns_consecutive[@]}"; do
     echo "    Varying n (for consecutive): $n"
-    process_real_datasets_consecutive_loss "$n" "$base_POISONING_PERCENTAGE"
-    process_sync_datasets_consecutive_loss "$n" "$base_R" "$base_POISONING_PERCENTAGE"
     process_real_datasets_consecutive_w_endpoints_loss "$n" "$base_POISONING_PERCENTAGE"
     process_sync_datasets_consecutive_w_endpoints_loss "$n" "$base_R" "$base_POISONING_PERCENTAGE"
 done
@@ -550,8 +512,6 @@ done
 
 for n in "${ns_consecutive[@]}"; do
     echo "    Varying n (for consecutive): $n"
-    process_real_datasets_consecutive_loss "$n" "$base_POISONING_PERCENTAGE"
-    process_sync_datasets_consecutive_loss "$n" "$base_R" "$base_POISONING_PERCENTAGE"
     process_real_datasets_consecutive_w_endpoints_loss "$n" "$base_POISONING_PERCENTAGE"
     process_sync_datasets_consecutive_w_endpoints_loss "$n" "$base_R" "$base_POISONING_PERCENTAGE"
 done
@@ -571,7 +531,6 @@ done
 
 for R in "${Rs_consecutive[@]}"; do
     echo "    Varying R (for consecutive): $R"
-    process_sync_datasets_consecutive_loss "$base_n" "$R" "$base_POISONING_PERCENTAGE"
     process_sync_datasets_consecutive_w_endpoints_loss "$base_n" "$R" "$base_POISONING_PERCENTAGE"
 done
 
@@ -586,7 +545,6 @@ done
 
 for R in "${Rs_consecutive[@]}"; do
     echo "    Varying R (for consecutive): $R"
-    process_sync_datasets_consecutive_loss "$base_brute_force_n" "$R" "$base_brute_force_POISONING_PERCENTAGE"
     process_sync_datasets_consecutive_w_endpoints_loss "$base_brute_force_n" "$R" "$base_brute_force_POISONING_PERCENTAGE"
     process_sync_datasets_consecutive_w_endpoints_duplicate_allowed_loss "$base_brute_force_n" "$R" "$base_brute_force_POISONING_PERCENTAGE"
     process_sync_datasets_consecutive_w_endpoints_using_relaxed_solution_loss "$base_brute_force_n" "$R" "$base_brute_force_POISONING_PERCENTAGE"
@@ -609,8 +567,6 @@ done
 
 for percentage in "${POISONING_PERCENTAGES_consecutive[@]}"; do
     echo "    Varying poisoning percentage (for consecutive): $percentage"
-    process_real_datasets_consecutive_loss "$base_n" "$percentage"
-    process_sync_datasets_consecutive_loss "$base_n" "$base_R" "$percentage"
     process_real_datasets_consecutive_w_endpoints_loss "$base_n" "$percentage"
     process_sync_datasets_consecutive_w_endpoints_loss "$base_n" "$base_R" "$percentage"
 done
@@ -629,8 +585,6 @@ done
 
 for percentage in "${POISONING_PERCENTAGES_consecutive[@]}"; do
     echo "    Varying poisoning percentage (for consecutive): $percentage"
-    process_real_datasets_consecutive_loss "$base_brute_force_n" "$percentage"
-    process_sync_datasets_consecutive_loss "$base_brute_force_n" "$base_brute_force_R" "$percentage"
     process_real_datasets_consecutive_w_endpoints_loss "$base_brute_force_n" "$percentage"
     process_sync_datasets_consecutive_w_endpoints_loss "$base_brute_force_n" "$base_brute_force_R" "$percentage"
 done

@@ -54,8 +54,6 @@ run_plot_script() {
 
 # List of plot scripts to run
 PLOT_SCRIPTS=(
-    # "plot_datasets.py"
-    # "plot_lambda_LgrLle.py"
     "plot_lambda_LgrLub.py"
     "plot_lambda_time.py"
     "plot_n_LgrLub.py"
@@ -64,16 +62,14 @@ PLOT_SCRIPTS=(
     "plot_lambda_Ls_seed0.py"
     "plot_lambda_L_ratios_brute_force.py"
     "plot_R_L_ratios_brute_force.py"
-    # "plot_poisoned_datasets.py"
+    "plot_poisoned_datasets.py"
     "plot_lambda_LgrLconsec.py"
-    # "plot_lambda_LconsecLbruteforce.py"
-    # "plot_lambda_LconsecLbruteforce_duplicate_allowed.py"
-    # "plot_lambda_LgrLconsec_duplicate_allowed.py"
-    # "plot_lambda_LconsecLub.py"
-    # "plot_lambda_LconsecLub_duplicate_allowed.py"
-    # "plot_lambda_LgrLconsec_using_relaxed_solution.py"
+    "plot_lambda_LgrLconsec_duplicate_allowed.py"
+    "plot_lambda_LconsecLbruteforce.py"
+    "plot_lambda_LconsecLbruteforce_duplicate_allowed.py"
+    "plot_lambda_LconsecLub.py"
+    "plot_lambda_LconsecLub_duplicate_allowed.py"
     "plot_lambda_Lconsec_using_relaxed_solution_Lconsec.py"
-    # "plot_lambda_Lconsec_using_relaxed_solution_Lbruteforce.py"
 )
 
 # Track success/failure

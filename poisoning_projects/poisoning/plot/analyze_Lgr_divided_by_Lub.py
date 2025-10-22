@@ -145,7 +145,7 @@ def main():
     data_dir = os.path.join(script_dir, "..")
     
     # Load data
-    print("Loading data...")
+    # print("Loading data...")
     df_results = load_loss(data_dir)
     df_upper_bound = load_upper_bound(data_dir)
     

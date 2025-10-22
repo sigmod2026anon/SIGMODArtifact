@@ -44,7 +44,7 @@ def load_loss_comparison_data(base_dir, approach=None):
     if not os.path.exists(loss_dir):
         raise FileNotFoundError(f"Loss directory not found: {loss_dir}")
     
-    print(f"Loading {approach} results from: {loss_dir}")
+    # print(f"Loading {approach} results from: {loss_dir}")
     
     all_data = []
     
@@ -134,4 +134,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error: {e}")
         import traceback
-        traceback.print_exc() 
+        traceback.print_exc()

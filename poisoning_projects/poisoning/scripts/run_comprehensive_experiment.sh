@@ -7,6 +7,8 @@ set -euo pipefail
 # Load common environment
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
+mkdir -p "$RESULTS_DIR"
+
 # Performance stabilization setup
 echo "Setting up performance stabilization..."
 {
@@ -116,10 +118,10 @@ if ! "$SCRIPT_DIR/step3_inject_poison.sh" $ALL_QUICK_ARG; then
     exit 1
 fi
 
-# Step 3.0: Inject poison into datasets (duplicate allowed)
-echo "Step 3.0: Injecting poison into datasets (duplicate allowed)..."
-if ! "$SCRIPT_DIR/step3_0_inject_poison_duplicate_allowed.sh" $ALL_QUICK_ARG; then
-    echo "Step 3.0 failed"
+# Step 3.1: Inject poison into datasets (duplicate allowed)
+echo "Step 3.1: Injecting poison into datasets (duplicate allowed)..."
+if ! "$SCRIPT_DIR/step3_1_inject_poison_duplicate_allowed.sh" $ALL_QUICK_ARG; then
+    echo "Step 3.1 failed"
     exit 1
 fi
 

@@ -37,7 +37,7 @@ def load_loss(base_dir, duplicate_allowed=False, approach=None):
     
     # Load data from loss directory (lambda=0)
     if os.path.exists(loss_dir):
-        print(f"Loading legitimate results (lambda=0) from: {loss_dir}")
+        # print(f"Loading legitimate results (lambda=0) from: {loss_dir}")
         json_files = glob.glob(os.path.join(loss_dir, "**/*.json"), recursive=True)
         
         for json_file in json_files:
@@ -71,7 +71,7 @@ def load_loss(base_dir, duplicate_allowed=False, approach=None):
     duplicates = df.duplicated(subset=duplicate_key_columns, keep=False)
     
     if duplicates.any():
-        print(f"Found {duplicates.sum()} duplicate entries. Taking average of duplicate values.")
+        # print(f"Found {duplicates.sum()} duplicate entries. Taking average of duplicate values.")
         # If there are duplicates, take the average
         df = df.groupby(duplicate_key_columns, as_index=False)['loss'].mean()
         # Reorder columns
@@ -84,4 +84,3 @@ if __name__ == "__main__":
     df = load_loss(base_dir)
     df = df.sort_values(by=["dataset_name", "n", "R", "seed", "data_type", "lambda"])
     df.to_csv("../results/loss.csv", index=False)
-

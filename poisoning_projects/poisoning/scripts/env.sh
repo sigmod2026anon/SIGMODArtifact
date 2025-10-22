@@ -19,6 +19,7 @@ base_POISONING_PERCENTAGE=10
 all_POISONING_PERCENTAGES=(2 4 6 8 10 12 14 16 18 20)
 all_POISONING_PERCENTAGES_consecutive=(2 4 6 8 10)
 quick_POISONING_PERCENTAGES=(2 6 10)
+quick_POISONING_PERCENTAGES_consecutive=(2 6)
 
 # Real dataset names
 all_real_dataset_names=(
@@ -65,10 +66,13 @@ quick_ns=(
     100
     1000
 )
+quick_ns_consecutive=(
+    100
+)
 
 # seeds
 all_seeds=($(seq 0 99))
-quick_seeds=(50)
+quick_seeds=(0)
 
 # R values
 base_R=100000
@@ -94,6 +98,9 @@ quick_Rs=(
     10000
     100000
 )
+quick_Rs_consecutive=(
+    100000
+)
 
 # Brute force
 base_brute_force_POISONING_PERCENTAGE=10
@@ -105,8 +112,6 @@ quick_brute_force_ns=(50)
 base_brute_force_R=1000
 all_brute_force_Rs=(100 150 200 300 500 1000 2000 5000 10000)
 quick_brute_force_Rs=(100 1000 10000)
-# all_brute_force_Rs=(1000)
-# quick_brute_force_Rs=(1000)
 
 export base_POISONING_PERCENTAGE base_n base_R
 export all_POISONING_PERCENTAGES quick_POISONING_PERCENTAGES
@@ -119,3 +124,4 @@ export base_brute_force_POISONING_PERCENTAGE all_brute_force_POISONING_PERCENTAG
 export base_brute_force_n all_brute_force_ns quick_brute_force_ns
 export base_brute_force_R all_brute_force_Rs quick_brute_force_Rs
 export all_POISONING_PERCENTAGES_consecutive all_ns_consecutive all_Rs_consecutive
+export quick_POISONING_PERCENTAGES_consecutive quick_ns_consecutive quick_Rs_consecutive

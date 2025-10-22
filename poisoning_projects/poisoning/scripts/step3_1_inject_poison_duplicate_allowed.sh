@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# [POISON] Step 3.0: Inject poison into datasets with duplicate allowed
+# [POISON] Step 3.1: Inject poison into datasets with duplicate allowed
 # This script injects poison into all generated datasets using duplicate allowed approach
 
 # Load common environment
@@ -57,7 +57,7 @@ if [ "$ALL_MODE" = false ] && [ "$QUICK_MODE" = false ]; then
     exit 1
 fi
 
-echo "[POISON] Step 3.0: Injecting poison into datasets with duplicate allowed..."
+echo "[POISON] Step 3.1: Injecting poison into datasets with duplicate allowed..."
 echo "  Data directory: $DATA_DIR"
 echo "  Results directory: $RESULTS_DIR"
 echo "  Base poisoning percentage: $base_POISONING_PERCENTAGE"

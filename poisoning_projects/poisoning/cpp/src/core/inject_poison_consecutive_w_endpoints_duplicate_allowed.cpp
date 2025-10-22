@@ -352,7 +352,7 @@ static Cubic derivative_eq_cubic(
 // Choose optimal integer b in [0, L] for fixed (a,i), using the cubic’s real roots and endpoints.
 static int get_optimal_b_for_ai(
     const std::vector<double>& k, const Prefix& P,
-    int a, int i, int lambda, const MSEParts& basePartsForCheck
+    int a, int i, int lambda
 ) {
     int L = lambda - a;
     if (L <= 0) return 0;
@@ -429,9 +429,7 @@ std::vector<std::uint64_t> get_poison_values_consecutive_w_endpoints_duplicate_a
     for (int a = 0; a <= lambda; ++a) {
         for (int i = 2; i <= n-1; ++i) {
             // pick best b for this (a,i)
-            // (basePartsForCheck unused here but kept to show intended extension)
-            MSEParts dummy{};
-            int b = get_optimal_b_for_ai(k, P, a, i, lambda, dummy);
+            int b = get_optimal_b_for_ai(k, P, a, i, lambda);
             // evaluate
             auto parts = calc_parts_ab_i(k, P, a, b, i, lambda);
             double mse = calc_mse_from_parts(parts);

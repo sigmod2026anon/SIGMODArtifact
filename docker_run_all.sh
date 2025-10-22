@@ -49,10 +49,7 @@ echo "Running mode: $MODE"
 # Docker container resource limits and isolation
 docker run -d \
     --cpus="1" \
-    --memory="4g" \
-    --memory-swap="4g" \
     --cpuset-cpus="0" \
-    --shm-size=1g \
     --cap-add=SYS_ADMIN \
     -v $DATA_DIR:/workspace/data \
     -v $PROJECTS_DIR:/workspace/poisoning_projects \
