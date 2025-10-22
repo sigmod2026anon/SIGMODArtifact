@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 import os
 from load_loss import load_loss
-from load_loss_comparison import load_loss_comparison_data
 from load_upper_bound import load_upper_bound
 from load_optimal_poison import load_optimal_poison
 from plot_config import LOSS_COLUMN, UPPER_BOUND_COLUMN, DATASET_NAMES_BRUTE_FORCE
@@ -63,7 +62,7 @@ def main():
     df_greedy_relaxed_loss = load_loss(data_dir, approach="duplicate_allowed")
     df_sege_loss = load_loss(data_dir, approach="consecutive_w_endpoints")
     df_sege_heu_loss = load_loss(data_dir, approach="consecutive_w_endpoints_using_relaxed_solution")
-    df_sege_relaxed_loss = load_loss_comparison_data(data_dir, approach="consecutive_w_endpoints_duplicate_allowed")
+    df_sege_relaxed_loss = load_loss(data_dir, approach="consecutive_w_endpoints_duplicate_allowed")
     df_upper_bound = load_upper_bound(data_dir)
     df_optimal_poison = load_optimal_poison(data_dir)
 

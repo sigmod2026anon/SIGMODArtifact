@@ -4,7 +4,6 @@ matplotlib.use('Agg')
 matplotlib.rcParams['figure.constrained_layout.use'] = True
 import matplotlib.pyplot as plt
 import os
-from load_loss_comparison import load_loss_comparison_data
 from load_loss import load_loss
 from plot_config import (
     TICK_SIZE, LEGEND_SIZE, XLABEL_SIZE, FONT_SIZE,
@@ -217,9 +216,9 @@ if __name__ == '__main__':
     # Data directory (poisoning folder)
     data_dir = ".."
     
-    # Load data using load_loss_comparison
+    # Load data using load_loss
     # print("Loading comparison data...")
-    consecutive_w_endpoints_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints")
+    consecutive_w_endpoints_df = load_loss(data_dir, "consecutive_w_endpoints")
     consecutive_w_endpoints_using_relaxed_solution_df = load_loss(data_dir, approach="consecutive_w_endpoints_using_relaxed_solution")
     
     if consecutive_w_endpoints_df.empty or consecutive_w_endpoints_using_relaxed_solution_df.empty:

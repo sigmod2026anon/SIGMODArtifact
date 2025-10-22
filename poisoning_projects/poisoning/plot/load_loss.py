@@ -3,30 +3,17 @@ import os
 import json
 import glob
 
-def load_loss(base_dir, duplicate_allowed=False, approach=None):
-    """
-    Load results from JSON files
-    Combine data from loss directory (lambda=0) and inject_poison directory (lambda>0)
-    
-    Args:
-        base_dir: Base directory containing results
-        duplicate_allowed: If True, load from loss_duplicate_allowed directory
-        approach: Specific approach to load ("original", "consecutive_w_endpoints", 
-                 "consecutive_w_endpoints_using_relaxed_solution", "duplicate_allowed", or None for original)
-    """
-    # Map approach names to directory paths
+def load_loss(base_dir, approach=None):
     approach_dirs = {
         "original": "loss",
         "consecutive_w_endpoints": "loss_consecutive_w_endpoints",
         "consecutive_w_endpoints_using_relaxed_solution": "loss_consecutive_w_endpoints_using_relaxed_solution",
-        "duplicate_allowed": "loss_duplicate_allowed"
+        "duplicate_allowed": "loss_duplicate_allowed",
+        "consecutive_w_endpoints_duplicate_allowed": "loss_consecutive_w_endpoints_duplicate_allowed"
     }
     
     if approach is None:
-        if duplicate_allowed:
-            approach = "duplicate_allowed"
-        else:
-            approach = "original"
+        approach = "original"
     
     if approach not in approach_dirs:
         raise ValueError(f"Unknown approach: {approach}. Available approaches: {list(approach_dirs.keys())}")

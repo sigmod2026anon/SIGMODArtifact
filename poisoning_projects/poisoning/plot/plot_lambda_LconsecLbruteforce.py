@@ -4,7 +4,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from load_loss_comparison import load_loss_comparison_data
+from load_loss import load_loss
 from load_optimal_poison import load_optimal_poison
 from plot_config import (
     TICK_SIZE, LEGEND_SIZE, XLABEL_SIZE, FONT_SIZE,
@@ -231,7 +231,7 @@ if __name__ == '__main__':
     
     # Load data
     # print("Loading consecutive with endpoints data...")
-    consecutive_w_endpoints_df = load_loss_comparison_data(data_dir, "consecutive_w_endpoints")
+    consecutive_w_endpoints_df = load_loss(data_dir, "consecutive_w_endpoints")
     
     # print("Loading optimal poison data...")
     df_optimal_poison = load_optimal_poison(data_dir)

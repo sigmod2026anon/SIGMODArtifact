@@ -425,7 +425,7 @@ def main():
     ]
     row_titles = [""]
     column_seeds = [0, 0, 0]
-    plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_error_3.pdf", xlim=(4.6245e12, 4.6255e12), ylim=(220, 280))
+    plot_poisoned_datasets(target_configs, column_seeds, row_titles, "poisoned_datasets_largest_diff_segment_greedy_error_3.pdf")
 
 
 if __name__ == "__main__":
